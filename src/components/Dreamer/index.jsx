@@ -39,7 +39,10 @@ const Dreamer = ({ name }) => {
         >
           {name[0]}
         </Avatar>
-        <Typography variant="h6" sx={{ mt: 1, fontWeight: "bold" }}>
+        <Typography
+          variant="h6"
+          sx={{ mt: 1, fontWeight: "bold", color: "#fff" }}
+        >
           {name}
         </Typography>
         <Button

@@ -16,21 +16,40 @@ function DreamersPanel() {
 
   return (
     <>
-      <div style={{ display: "flex", gap: 8, margin: 24 }}>
-        <TextField
-          size="small"
-          label="Nuevo soñador"
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          variant="outlined"
-        />
-        <Button
-          variant="contained"
-          style={{ textTransform: "none", background: "#444", color: "#fff" }}
-          onClick={handleAdd}
+      <div style={{ display: "flex", justifyContent: "center", margin: 24 }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 12,
+            background: "rgba(35,35,35,0.7)",
+            padding: 30,
+            borderRadius: 8,
+            maxWidth: 400,
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          Agregar
-        </Button>
+          <TextField
+            size="small"
+            label="Nuevo soñador"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            variant="outlined"
+            sx={{
+              background: "#232323",
+              input: { color: "#fff" },
+              "& .MuiInputLabel-root": { color: "#fff" },
+            }}
+          />
+          <Button
+            variant="contained"
+            style={{ textTransform: "none", background: "#444", color: "#fff" }}
+            onClick={handleAdd}
+          >
+            Agregar
+          </Button>
+        </div>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 24, margin: 24 }}>
         {dreamers.map((d, i) => (

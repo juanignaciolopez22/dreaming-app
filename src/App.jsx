@@ -1,13 +1,12 @@
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./App.css";
+import Layout from "./components/Layout";
 import DreamersPanel from "./components/DreamersPanel";
-const theme = createTheme({ palette: { mode: "light" } });
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <Layout>
       <DreamersPanel />
-    </ThemeProvider>
+    </Layout>
   );
 }
 
