@@ -155,6 +155,4 @@ npm run deploy
 **Hecho con un poco de sueño y mucho café ☕️**  
 **Para Alkemy 🚀**
 
----
-
-*Readme redactado con ayuda de mi Bro **GitHub Copilot** 🤖*
+> *Readme redactado con ayuda de mi Bro **GitHub Copilot** 🤖*
