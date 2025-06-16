@@ -4,6 +4,7 @@ export const useDreamersStore = create((set) => ({
   dreamers: [],
   loggedDreamer: null,
   notifications: [],
+
   // Agregar un dreamer
   addDreamer: (dreamer) =>
     set((state) => ({
@@ -58,6 +59,7 @@ export const useDreamersStore = create((set) => ({
           : d
       ),
     })),
+
   publishDream: (dreamerName, dreamIndex) =>
     set((state) => ({
       dreamers: state.dreamers.map((d) =>
@@ -71,6 +73,7 @@ export const useDreamersStore = create((set) => ({
           : d
       ),
     })),
+
   addNotification: (notif) =>
     set((state) => ({
       notifications: [

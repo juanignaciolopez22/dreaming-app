@@ -2,12 +2,11 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDreamersStore } from "../../../../../../store/dreamersStore";
-
+import DreamGalleryLike from "./components/DreamGalleryLike";
+import DreamGalleryPublish from "./components/DreamGalleryPublish";
 const DreamerGallery = ({ dreams, ownerName }) => {
   const [index, setIndex] = useState(0);
   const { loggedDreamer, likeDream, publishDream } = useDreamersStore();
@@ -61,41 +60,16 @@ const DreamerGallery = ({ dreams, ownerName }) => {
       <Typography variant="caption" sx={{ mt: 1 }}>
         {index + 1} / {dreams.length}
       </Typography>
-      {/* Botón de like solo para otros dreamers logueados */}
-      {canLike && (
-        <IconButton
-          onClick={() => likeDream(ownerName, index)}
-          sx={{ color: "#e53935", mt: 1 }}
-        >
-          <FavoriteIcon />
-          <span style={{ marginLeft: 6, color: "#fff", fontWeight: 600 }}>
-            {dream.likes || 0}
-          </span>
-        </IconButton>
-      )}
-      {/* Si no puede likear, igual muestra la cantidad */}
-      {!canLike && (
-        <Box sx={{ mt: 1, display: "flex", alignItems: "center" }}>
-          <FavoriteIcon sx={{ color: "#888" }} />
-          <span style={{ marginLeft: 6, color: "#fff", fontWeight: 600 }}>
-            {dream.likes || 0}
-          </span>
-        </Box>
-      )}
-      {isOwner && !isPublished && (
-        <Button
-          variant="outlined"
-          sx={{ mt: 2, color: "#fff", borderColor: "#444" }}
-          onClick={() => publishDream(ownerName, index)}
-        >
-          Publicar en galería
-        </Button>
-      )}
-      {isPublished && (
-        <Typography variant="caption" sx={{ mt: 1, color: "#90caf9" }}>
-          Publicado en galería
-        </Typography>
-      )}
+      <DreamGalleryLike
+        canLike={canLike}
+        onLike={() => likeDream(ownerName, index)}
+        likes={dream.likes}
+      />
+      <DreamGalleryPublish
+        isOwner={isOwner}
+        isPublished={isPublished}
+        onPublish={() => publishDream(ownerName, index)}
+      />
     </Box>
   );
 };

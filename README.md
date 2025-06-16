@@ -1,86 +1,160 @@
 # Dreaming App
 
-Dreaming App is a web application where users can share, view, and save their dreams. The goal is to create a creative and visually attractive space to record dreams, get inspired, and explore the dream experiences of other users.
+Dreaming App es una aplicación web donde los usuarios pueden crear perfiles soñadores; registar, visualizar y compartir sus sueños, así como interactuar con los sueños de otros en la comunidad. El objetivo es ofrecer un espacio creativo y visualmente atractivo para inspirarse y explorar experiencias oníricas (?. 
 
-> **Note:** This app is under construction and currently at Delivery 1 (Entrega 1).
+---
 
-## Concept
+## Concepto
 
-The app is designed as a collaborative and visual dream diary. Each user can create their "Dreamer" profile, add dreams, and view a generated dream gallery. The design uses dark colors and animated backgrounds to convey a nocturnal and creative atmosphere, with a modern and minimalist interface.
+La app funciona como un diario de sueños colaborativo y visual. Cada usuario puede crear su perfil de "Soñador", agregar sueños, generar imágenes con IA para ilustrarlos y compartirlos en una galería pública. El diseño utiliza una estética nocturna, moderna y minimalista, con animaciones y colores oscuros para transmitir creatividad y misterio.
 
-## Main Features
+---
 
-- **Dreamers:** Create and manage dreamer profiles.
-- **Dreams:** Add and save dreams associated with each dreamer.
-- **Dreams Gallery:** View dreams in an attractive gallery.
-- **Animations:** Animated background for an immersive experience.
-- **Responsive Design:** Interface adaptable to any device.
-- **Easy Navigation:** Navigation bar and footer present on all pages.
+## Features principales
 
-## Technologies & Dependencies
+- **Perfil y sesión del Soñador:**  
+  Crea tu soñador. Cada perfil tiene nombre, imagen (opcional) y contraseña (PIN) de acceso. Una vez creado, podes logearte y deslogearte las veces que desees, simplemente haciendo click sobre el Dreamer.
 
-- **React** (with Vite)
-- **Material UI** (MUI) for UI components
-- **@tsparticles** for animated backgrounds
-- **Axios** for HTTP requests
-- **Pollinations AI Image API** for generating dream images with artificial intelligence
-- **React Router** (planned for future deliveries)
+- **Agregar Sueños:**  
+  Cada soñador puede registrar sus sueños, escribiendo su descripción y generando una imagen ilustrativa usando inteligencia artificial (Pollinations AI). Para ello, primero debes logearte en un Dreamer, y nuevamente haciendo click sobre este ya puedes comenzar a soñar.
 
-## Project Structure
+- **Publicar Sueños:**  
+  Los sueños pueden guardarse de forma privada o publicarse en la galería general.
+
+- **Galería de Sueños:**  
+  Visualiza los sueños publicados por todos los soñadores en una galería atractiva.
+
+- **Likes y Reacciones:**  
+  Los soñadores pueden dar "like" a los sueños de otros soñadores (no a los propios!).
+
+- **Ranking de Soñadores:**  
+  Un ranking en la Home muestra a los soñadores más activos y con más likes en sus sueños publicados. Solo podrás visualizarlo si estás logeado.
+  **🟣 BONUS**
+
+- **Animaciones:**  
+  Fondo animado para una experiencia inmersiva.
+
+- **Notificaciones:**  
+  Sistema que alerta la generación de nuevos sueños.
+  **🟣 BONUS**
+
+- **Autenticación Simple:**  
+  Acceso a cada Dreamer mediante PIN de 4 dígitos.
+
+- **Buscador de Soñadores:**  
+  Filtra y busca soñadores por nombre.
+  **🟣 BONUS**
+
+---
+
+## Tecnologías y dependencias
+
+- **React** (con Vite)
+- **Material UI (MUI)** 
+- **@tsparticles** — Fondos animados y partículas interactivas.
+- **Axios**
+- **Pollinations AI Image API** — Generación de imágenes mediante inteligencia artificial (gratuita).
+- **Zustand** — Manejo de estado global simple. **🟣 BONUS**
+- **React Router** — (Planeado para futuras entregas) Navegación entre vistas.
+
+---
+
+## Estructura del Proyecto
 
 ```
-src/
-  components/
-    Navbar.jsx
-    Footer.jsx
-    Layout.jsx
-    Dreamer.jsx
-    DreamersPanel.jsx
-    DreamerGallery.jsx
-    Background.jsx
-  pages/
-    Home.jsx
-    Dreamers.jsx
-    DreamsGallery.jsx
-  services/
-    api.js         // Functions to interact with external APIs (e.g., Pollinations AI)
-  App.jsx
-  App.css
+components
+  Layout
+    Background
+    Footer
+    Navbar
+      NotificationsMenu
+  Home
+    HomeWelcome
+    HomeRanking
+      RankedDreamer
+    utils
+  DreamersPanel
+    CreateDreamerDialog
+    Dreamer
+      Dream
+        DreamErrorDialog
+      DreamerCard
+      DreamerGallery
+        DreamGalleryLike
+        DreamGalleryPublish
+      DreamerLoginDialog
+    DreamerSearch
+  DreamsGallery
+    DreamPublishedCard
+services
+  images.api
+store
+  dreamersStore
+App
+App.css
+main
 ```
 
-- **components/**: Reusable and layout components.
-- **pages/**: Main views of the application.
-- **services/**: API and external service utilities.
-- **App.jsx**: Entry point, manages layout and routes.
+- **components/**: Componentes reutilizables, de layout y funcionalidad, agrupados por dominio.
+- **services/**: Funciones para interactuar con APIs externas (por ejemplo, generación de imágenes).
+- **store/**: Estado global de la app (Zustand).
+- **App.jsx**: Punto de entrada de la app, gestiona layout y rutas.
+- **main.jsx**: Renderizado principal de React.
+- **App.css**: Estilos globales.
 
-## Installation and Usage
+---
 
-1. Clone the repository:
+## Rutas navegables
+
+- `/dreaming-app/`  
+  Página principal (Home): muestra bienvenida, ranking y acceso a funcionalidad principal.
+
+- `/dreaming-app/dreamers`  
+  Panel de soñadores: crea, busca, loguea y gestiona perfiles de soñadores, y obviamente, sueña. Publica, likea, y vive los sueños.
+
+- `/dreaming-app/gallery`  
+  Galería de sueños: visualiza todos los sueños publicados por la comunidad.
+
+---
+
+## Instalación y Uso
+
+1. Clona el repositorio:
    ```sh
    git clone https://github.com/juanignaciolopez22/dreaming-app.git
    cd dreaming-app
    ```
 
-2. Install dependencies:
+2. Instala las dependencias:
    ```sh
    npm install
    ```
 
-3. Start the app in development mode:
+3. Inicia la app en modo desarrollo:
    ```sh
    npm run dev
    ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+4. Abre [http://localhost:5173/dreaming-app](http://localhost:5173/dreaming-app) en tu navegador.
+
+---
 
 ## Deploy
 
-The project can be easily deployed to GitHub Pages using Vite and the script `npm run deploy`.
+El proyecto puede desplegarse fácilmente en GitHub Pages usando Vite y el script:
 
-**Live demo:**  
+```sh
+npm run deploy
+```
+
+**Demo en vivo:**  
 [https://juanignaciolopez22.github.io/dreaming-app/](https://juanignaciolopez22.github.io/dreaming-app/)
 
 ---
 
-**Made with a bit of sleepiness and coffee ☕️**  
-**For Alkemy 🚀**
+**Hecho con un poco de sueño y mucho café ☕️**  
+**Para Alkemy 🚀**
+
+
+
+*Readme redactado con ayuda de mi Bro **GitHub Copilot** 🤖*

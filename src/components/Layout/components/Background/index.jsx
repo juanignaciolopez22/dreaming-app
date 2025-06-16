@@ -3,7 +3,6 @@ import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+es
 import { useEffect } from 'react';
 async function loadParticles(options) {
   await loadAll(tsParticles);
-
   await tsParticles.load({ id: "tsparticles", options });
 }
 

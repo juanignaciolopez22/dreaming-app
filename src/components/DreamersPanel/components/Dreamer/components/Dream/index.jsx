@@ -1,24 +1,23 @@
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
 import { fetchPollinationsImage } from "../../../../../../services/images.api";
-import { useDreamersStore } from "../../../../../../store/dreamersStore"; 
+import { useDreamersStore } from "../../../../../../store/dreamersStore";
+import DreamErrorDialog from "./components/DreamErrorDialog";
 
-const Dream = ({ onSave }) => {
+const Dream = ({ onSave, dreamerName }) => {
   const [dream, setDream] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorDialog, setErrorDialog] = useState(false);
-  const { addNotification } = useDreamersStore(); 
+  const { addNotification } = useDreamersStore();
+
   const handleSave = async () => {
     setLoading(true);
     try {
       const imageUrl = await fetchPollinationsImage(dream);
       onSave(dream, imageUrl);
       addNotification({
-        text: "¡Qué bueno que hayas soñado, no olvides publicarlo en la DreamsGallery!",
+        text: `¡Qué bueno que hayas soñado sobre "${dream}", ${dreamerName}! Ahora no olvides publicarlo en la DreamsGallery.`,
       });
       setDream("");
     } catch {
@@ -75,48 +74,14 @@ const Dream = ({ onSave }) => {
           {loading ? "Generando..." : "Guardar sueño"}
         </Button>
       </div>
-      <Dialog
+      <DreamErrorDialog
         open={errorDialog}
         onClose={() => setErrorDialog(false)}
-        PaperProps={{
-          sx: {
-            background: "#232323",
-            color: "#fff",
-            borderRadius: 2,
-          },
+        onRetry={() => {
+          setErrorDialog(false);
+          handleSave();
         }}
-      >
-        <DialogTitle sx={{ textAlign: "center", fontWeight: "bold" }}>
-          Error generando la imagen del sueño!
-        </DialogTitle>
-        <DialogActions sx={{ justifyContent: "center", pb: 2 }}>
-          <Button
-            onClick={() => setErrorDialog(false)}
-            sx={{
-              color: "#fff",
-              background: "#e57373", // rojo suave
-              minWidth: 120,
-              "&:hover": { background: "#d32f2f" }, // rojo más fuerte al pasar el mouse
-            }}
-          >
-            Cerrar
-          </Button>
-          <Button
-            onClick={() => {
-              setErrorDialog(false);
-              handleSave();
-            }}
-            sx={{
-              color: "#fff",
-              background: "#616161",
-              minWidth: 120,
-              "&:hover": { background: "#424242" },
-            }}
-          >
-            Reintentar
-          </Button>
-        </DialogActions>
-      </Dialog>
+      />
     </div>
   );
 };
