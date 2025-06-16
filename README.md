@@ -135,7 +135,7 @@ main
    npm run dev
    ```
 
-4. Abre [http://localhost:5173/dreaming-app](http://localhost:5173/dreaming-app) en tu navegador.
+4. Abre [http://localhost:5173/dreaming-app/](http://localhost:5173/dreaming-app/) en tu navegador.
 
 ---
 
@@ -154,6 +154,10 @@ npm run deploy
 
 **Hecho con un poco de sueño y mucho café ☕️**  
 **Para Alkemy 🚀**
+
+
+
+
 
 
 
