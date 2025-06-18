@@ -7,9 +7,9 @@ function Layout({ children }) {
     <>
       <Background />
       <Navbar />
-      <div className="main-content">
+      <main className="main-content">
         {children}
-      </div>
+      </main>
       <Footer />
     </>
   );
