@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Box from "@mui/material/Box";
+import { useDreamersStore } from "../../../../store/dreamersStore";
 
 export default function DreamerCreateDialog({ open, onClose, onAddDreamer }) {
   const [newName, setNewName] = useState("");
@@ -14,7 +15,7 @@ export default function DreamerCreateDialog({ open, onClose, onAddDreamer }) {
   const [newImage, setNewImage] = useState(null);
   const [error, setError] = useState(false);
   const [pwError, setPwError] = useState(false);
-
+  const { dreamers } = useDreamersStore();
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -36,8 +37,15 @@ export default function DreamerCreateDialog({ open, onClose, onAddDreamer }) {
       setPwError(true);
       hasError = true;
     }
+    // Verifica si el nombre ya existe (ignorando mayúsculas/minúsculas y espacios)
+    const exists = dreamers.some(
+      (d) => d.name.trim().toLowerCase() === newName.trim().toLowerCase()
+    );
+    if (exists) {
+      setError(true);
+      hasError = true;
+    }
     if (hasError) return;
-
     onAddDreamer({
       name: newName.trim(),
       password: newPassword,
@@ -104,7 +112,17 @@ export default function DreamerCreateDialog({ open, onClose, onAddDreamer }) {
             variant="outlined"
             fullWidth
             error={error}
-            helperText={error ? "Por favor ingresa un nombre" : ""}
+            helperText={
+              error
+                ? dreamers.some(
+                    (d) =>
+                      d.name.trim().toLowerCase() ===
+                      newName.trim().toLowerCase()
+                  )
+                  ? "Ese nombre ya existe"
+                  : "Por favor ingresa un nombre"
+                : ""
+            }
             sx={{
               background: "#232323",
               input: { color: "#fff" },

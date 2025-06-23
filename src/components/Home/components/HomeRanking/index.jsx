@@ -32,37 +32,41 @@ export default function HomeRanking({ loggedDreamer, dreamers }) {
       >
         Hola, {loggedDreamer.name} .
       </Typography>
-      <Typography
-        variant="h4"
-        sx={{
-          color: "#bdbdbd",
-          fontWeight: 700,
-          mb: 3,
-          fontFamily: "'Orbitron', sans-serif",
-          textAlign: "center",
-          fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-        }}
-      >
-        Este es el ranking de Dreamers más soñadores:
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 4,
-          justifyContent: "center",
-          alignItems: "flex-end",
-          mt: 2,
-        }}
-      >
-        {ranking.map((d, i) => (
-          <RankedDreamer
-            key={d.name}
-            dreamer={d}
-            trophy={TROPHIES[i]?.icon}
-            isFirst={i === 0}
-          />
-        ))}
-      </Box>
+      {ranking.length > 0 && (
+        <>
+          <Typography
+            variant="h4"
+            sx={{
+              color: "#bdbdbd",
+              fontWeight: 700,
+              mb: 3,
+              fontFamily: "'Orbitron', sans-serif",
+              textAlign: "center",
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            }}
+          >
+            Este es el ranking de Dreamers más soñadores:
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 4,
+              justifyContent: "center",
+              alignItems: "flex-end",
+              mt: 2,
+            }}
+          >
+            {ranking.map((d, i) => (
+              <RankedDreamer
+                key={d.name}
+                dreamer={d}
+                trophy={TROPHIES[i]?.icon}
+                isFirst={i === 0}
+              />
+            ))}
+          </Box>
+        </>
+      )}
     </Box>
   );
 }

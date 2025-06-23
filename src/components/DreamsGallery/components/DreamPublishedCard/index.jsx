@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 export default function DreamPublishedCard({ dream }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -15,7 +17,9 @@ export default function DreamPublishedCard({ dream }) {
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "center",
+        cursor: "pointer",
       }}
+      onClick={() => navigate(`/gallery/${dream.id}`)}
     >
       <img
         src={dream.imageUrl}

@@ -23,7 +23,6 @@ export const useDreamersStore = create((set) => ({
   // Logout
   logoutDreamer: () => set({ loggedDreamer: null }),
 
-  // Agregar un sueño al dreamer logueado
   addDreamToLoggedDreamer: (dream) =>
     set((state) => ({
       dreamers: state.dreamers.map((d) =>
@@ -32,14 +31,29 @@ export const useDreamersStore = create((set) => ({
               ...d,
               dreams: [
                 ...d.dreams,
-                { ...dream, likes: 0 }, // cada sueño arranca con 0 likes
+                {
+                  ...dream,
+                  likes: 0,
+                  id: `${d.name.replace(/\s+/g, "").toLowerCase()}-dream-${
+                    d.dreams.length + 1
+                  }`,
+                },
               ],
             }
           : d
       ),
       loggedDreamer: {
         ...state.loggedDreamer,
-        dreams: [...state.loggedDreamer.dreams, { ...dream, likes: 0 }],
+        dreams: [
+          ...state.loggedDreamer.dreams,
+          {
+            ...dream,
+            likes: 0,
+            id: `${state.loggedDreamer.name
+              .replace(/\s+/g, "")
+              .toLowerCase()}-dream-${state.loggedDreamer.dreams.length + 1}`,
+          },
+        ],
       },
     })),
 

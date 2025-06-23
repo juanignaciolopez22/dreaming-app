@@ -23,6 +23,7 @@ La app funciona como un diario de sueños colaborativo y visual. Cada usuario pu
 
 - **Galería de Sueños:**  
   Visualiza los sueños publicados por todos los soñadores en una galería atractiva.
+  *Haz click en cualquier sueño para verlo en grande y con más detalles.*
 
 - **Likes y Reacciones:**  
   Los soñadores pueden dar "like" a los sueños de otros soñadores (no a los propios!).
@@ -55,7 +56,7 @@ La app funciona como un diario de sueños colaborativo y visual. Cada usuario pu
 - **Axios**
 - **Pollinations AI Image API** — Generación de imágenes mediante inteligencia artificial (gratuita).
 - **Zustand** — Manejo de estado global simple. **🟣 BONUS**
-- **React Router** — (Planeado para futuras entregas) Navegación entre vistas.
+- **React Router** — Navegación entre vistas.
 
 ---
 
@@ -86,6 +87,7 @@ components
     DreamerSearch
   DreamsGallery
     DreamPublishedCard
+    DreamGalleryModal
 services
   images.api
 store
@@ -114,6 +116,9 @@ main
 
 - `/dreaming-app/gallery`  
   Galería de sueños: visualiza todos los sueños publicados por la comunidad.
+
+- `/dreaming-app/gallery/:dreamId`  
+  Vista ampliada de un sueño publicado: al hacer click en una imagen de la galería, se abre un modal con dicha imagen en grande, su prompt particular y el autor de este.
 
 ---
 
